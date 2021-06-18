@@ -37,6 +37,7 @@ endif()
 
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/imgui)
 set(EXAMPLES_DIR ${SOURCE_DIR}/examples)
+set(BACKENDS_DIR ${SOURCE_DIR}/backends)
 set(FONTS_DIR ${SOURCE_DIR}/misc/fonts)
 
 
@@ -56,6 +57,7 @@ set(SOURCES_CXX_FILES
     ${SOURCE_DIR}/imgui.cpp
     ${SOURCE_DIR}/imgui_draw.cpp
     ${SOURCE_DIR}/imgui_widgets.cpp
+    ${SOURCE_DIR}/imgui_tables.cpp
     ${SOURCE_DIR}/imgui_demo.cpp
 )
 
@@ -94,6 +96,9 @@ source_group("Resource Files" FILES
 ##################################################################################################################
 # Target
 ##################################################################################################################
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+
 add_library(${PROJECT_NAME} 
     ${HEADERS_CXX_FILES}
     ${SOURCES_CXX_FILES}
@@ -103,7 +108,7 @@ add_library(${PROJECT_NAME}
 )
 target_include_directories(${PROJECT_NAME} PUBLIC 
     ${SOURCE_DIR}
-    ${SOURCE_DIR}/examples
+    ${SOURCE_DIR}/backends
 )
 if(IMGUI_IMPL_DX12 AND NOT IMGUI_STATIC_LIBRARY)
     target_link_libraries(${PROJECT_NAME} PUBLIC d3d12)
